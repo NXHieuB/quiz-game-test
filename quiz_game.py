@@ -22,13 +22,25 @@ def ask_question(question):
     return answer == question['answer']
 
 def run_quiz():
-    file_path = 'quiz_questions.csv'
+    file_path = 'quiz_question.csv'
     questions = load_questions(file_path)
     score = 0
     for question in questions:
         if ask_question(question):
             score += 1
     print(f"Your final score is {score}/{len(questions)}.")
+
+    # Storing the score in a file
+    with open('scores.txt', 'a') as file:
+        file.write(f"{score}\n")
+
+    # Displaying the list of high scores
+    print("High scores:")
+    with open('scores.txt', 'r') as file:
+        scores = [int(line.strip()) for line in file]
+        scores.sort(reverse=True)
+        for i, score in enumerate(scores):
+            print(f"{i+1}. {score}")
 
 if __name__ == "__main__":
     run_quiz()
