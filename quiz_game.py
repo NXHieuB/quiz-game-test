@@ -22,7 +22,7 @@ def ask_question(question):
     return answer == question['answer']
 
 def run_quiz():
-    file_path = 'quiz_question.csv'
+    file_path = 'quiz_questions.csv'
     questions = load_questions(file_path)
     score = 0
     for question in questions:
